@@ -1,0 +1,5 @@
+/Users/liangzhuowei/Projects/chinesechree/chinesechree/obj/Debug/chinesechree.csprojAssemblyReference.cache
+/Users/liangzhuowei/Projects/chinesechree/chinesechree/bin/Debug/chinesechree.exe
+/Users/liangzhuowei/Projects/chinesechree/chinesechree/bin/Debug/chinesechree.pdb
+/Users/liangzhuowei/Projects/chinesechree/chinesechree/obj/Debug/chinesechree.exe
+/Users/liangzhuowei/Projects/chinesechree/chinesechree/obj/Debug/chinesechree.pdb
