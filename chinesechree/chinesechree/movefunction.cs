@@ -65,11 +65,27 @@ namespace chinesechree
 
             Chess exchange = new wu("  +   ", "null", 0, 0, true);
 
-            exchange = Board[c, d];
-            
-            Board[c, d] = Board[a, b];
-            
-            Board[a, b] = exchange;
+            if (Board[c, d].getname().Contains("+"))
+            {
+                exchange = Board[c, d];
+
+                Board[c, d] = Board[a, b];
+
+                Board[a, b] = exchange;
+            }
+
+            else
+            {
+                Kill(Board[c, d]);
+
+                Board[c, d] = Board[a, b];
+
+                Board[a, b] = exchange;
+                
+            }
+
+
+
 
             Boardequal(Board, Boardshow);
 

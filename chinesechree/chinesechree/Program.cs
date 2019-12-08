@@ -136,7 +136,7 @@ namespace Chinesechess
 
 
 
-            while (jiang.getstate() == true || shuai.getstate() == true)
+            while (jiang.getstate() == true && shuai.getstate() == true)
             {
                 Console.WriteLine("\nPlayer 1 Choose chress you want to move");
                 string str1 = Console.ReadLine();
