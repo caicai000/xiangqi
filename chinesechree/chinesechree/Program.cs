@@ -35,6 +35,17 @@ namespace Chinesechess
             }
         }
 
+        public static void Boardequal(Chess[,] Board, Chess[,] Boardshow)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    Boardshow[i, j] = Board[i,j];
+                }
+            }
+        } 
+
         public static void Main(string[] args)
         {
             Chess[,] Board = new Chess[10, 9];
@@ -43,11 +54,11 @@ namespace Chinesechess
             
 
             Chess che1 = new che(" che1 ", "red", 0, 0, true);
-            Chess ma1 = new ma(" ma1  ", "red", 3, 3, true);
+            Chess ma1 = new ma(" ma1  ", "red", 0, 1, true);
             Chess xiang1 = new xiang("xiang1", "red", 0,2, true);
-            Chess shi1 = new shi(" she1 ", "red", 0, 3, true);
+            Chess shi1 = new shi(" shi1 ", "red", 0, 3, true);
             Chess shuai = new shuai("shuai ", "red", 0, 4, true);
-            Chess shi2 = new shi(" she2 ", "red", 0, 5, true);
+            Chess shi2 = new shi(" shi2 ", "red", 0, 5, true);
             Chess xiang2 = new xiang("xiang2", "red", 0, 6, true);
             Chess ma2 = new ma(" ma2  ", "red", 0, 7, true);
             Chess che2 = new che(" che2 ", "red", 0, 8, true);
@@ -62,9 +73,9 @@ namespace Chinesechess
             Chess che3 = new che(" che3 ", "black", 9, 0, true);
             Chess ma3 = new ma(" ma3  ", "black", 9, 1, true);
             Chess xiang3 = new xiang("xiang3 ", "black", 9, 2, true);
-            Chess shi3 = new shi(" she3 ", "black", 9, 3, true);
+            Chess shi3 = new shi(" shi3 ", "black", 9, 3, true);
             Chess jiang = new shuai("jiang ", "black", 9, 4, true);
-            Chess shi4 = new shi(" she4 ", "black", 9, 5, true);
+            Chess shi4 = new shi(" shi4 ", "black", 9, 5, true);
             Chess xiang4 = new xiang("xiang4 ", "black", 9, 6, true);
             Chess ma4 = new ma(" ma4  ", "black", 9, 7, true);
             Chess che4 = new che(" che4 ", "black", 9, 8, true);
@@ -74,7 +85,7 @@ namespace Chinesechess
             Chess bing7 = new bing("bing7 ", "black", 6, 2, true);
             Chess bing8 = new bing("bing8 ", "black", 6, 4, true);
             Chess bing9 = new bing("bing9 ", "black", 6, 6, true);
-            Chess bing10 = new bing("bing10", "black", 6, 8, true);
+            Chess bing10 = new bing("bing0", "black", 6, 8, true);
 
             Chess wu = new wu("  +   ", "null", 0, 0, true);
             
@@ -118,7 +129,7 @@ namespace Chinesechess
             
             ShowBoard(Board);
 
-            Boardshow = Board;
+            Boardequal(Board, Boardshow);
 
             
 
@@ -129,14 +140,27 @@ namespace Chinesechess
             {
                 Console.WriteLine("\nPlayer 1 Choose chress you want to move");
                 string str1 = Console.ReadLine();
-
                 canmove(str1, Board, Boardshow);
 
 
-                Console.WriteLine("\nPlayer 2 Choose chress you want to move");
+                Console.WriteLine("\nPlayer 1 Choose position you want to move [a,b]");
                 string str2 = Console.ReadLine();
+                Move(str1, str2, Board,Boardshow);
 
-               // break;
+                ShowBoard(Board);
+                
+
+
+                Console.WriteLine("\nPlayer 2 Choose chress you want to move");
+                string str3 = Console.ReadLine();
+                canmove(str3, Board, Boardshow);
+
+                Console.WriteLine("\nPlayer 2 Choose position you want to move [a,b])");
+                string str4 = Console.ReadLine();
+                Move(str3, str4, Board,Boardshow);
+                ShowBoard(Board);
+
+                // break;
             }
 
 
