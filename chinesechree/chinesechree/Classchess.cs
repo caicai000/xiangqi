@@ -46,11 +46,7 @@ namespace chinesechree
             {
                 return Color;
             }
-            public void Introduciton()
-            {
-                Console.WriteLine($"Hi,I'm {Name}, {Color},live in ({i},{j}),{state}");
-
-            }
+            
 
         }
         public class shuai : Chess
@@ -100,5 +96,6 @@ namespace chinesechree
             public wu(string Name, string Color, int i, int j, bool state)
                 : base(Name, Color, i, j, true, "wu") { }
         }
+        
     }
 }
