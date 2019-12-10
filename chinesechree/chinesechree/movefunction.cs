@@ -42,34 +42,38 @@ namespace chinesechree
             chess1.killstate();
 
         }
-        public static void Move(string str1, string str2, Chess[,] Board)
+        public static void Move(string str1, string str2, Chess[,] Board,gameBoard GameBoard)
         {
-            string[] sArray = str1.Split(',');
-            int a = Convert.ToInt32(sArray[0]);
-            int b = Convert.ToInt32(sArray[1]);
 
-            string[] ssArray = str2.Split(',');
-            int c = Convert.ToInt32(ssArray[0]);
-            int d = Convert.ToInt32(ssArray[1]);
 
-            
+                string[] sArray = str1.Split(',');
+                int a = Convert.ToInt32(sArray[0]);
+                int b = Convert.ToInt32(sArray[1]);
 
-            if (Board[c, d] == null )
-            {
-                Board[c, d] = Board[a, b];
+                string[] ssArray = str2.Split(',');
+                int c = Convert.ToInt32(ssArray[0]);
+                int d = Convert.ToInt32(ssArray[1]);
 
-                Board[a, b] = null;
-            }
 
-            else
-            {
-                Kill(Board[c, d]);
 
-                Board[c, d] = Board[a, b];
+                if (Board[c, d] == null)
+                {
+                    Board[c, d] = Board[a, b];
 
-                Board[a, b] = null;
+                    Board[a, b] = null;
+                }
 
-            }
+                else
+                {
+                    Kill(Board[c, d]);
+
+                    Board[c, d] = Board[a, b];
+
+                    Board[a, b] = null;
+
+                }
+                GameBoard.move(Board);
+                GameBoard.print();
 
         }
 
@@ -85,7 +89,7 @@ namespace chinesechree
                 {
                     if (FOE(Board[a, b], Board[a, d]))
                     {
-                        Console.Write("(" + a + "," + d + ")");
+                        //Console.Write("(" + a + "," + d + ")");
                         position.Add(a + "," + d);
                     }
 
@@ -93,7 +97,7 @@ namespace chinesechree
                 }
                 if (Board[a, d] == null)
                 {
-                    Console.Write("(" + a + "," + d + ")");
+                    //Console.Write("(" + a + "," + d + ")");
                     position.Add(a + "," + d);
 
                 }
@@ -106,7 +110,7 @@ namespace chinesechree
                 {
                     if (FOE(Board[a, b], Board[a, d]))
                     {
-                        Console.Write("(" + a + "," + d + ")");
+                        //Console.Write("(" + a + "," + d + ")");
                         position.Add(a + "," + d);
                     }
                     break;
@@ -123,7 +127,7 @@ namespace chinesechree
                     {
                         if (FOE(Board[a, b], Board[c, b]))
                         {
-                            Console.Write("(" + c + "," + b + ")");
+                            //Console.Write("(" + c + "," + b + ")");
                             position.Add(c + "," + b);
 
                         }
@@ -131,7 +135,7 @@ namespace chinesechree
                     }
                     if (Board[c, b] == null)
                     {
-                        Console.Write("(" + c + "," + b + ")");
+                        //Console.Write("(" + c + "," + b + ")");
                         position.Add(c + "," + b);
                     }
                 }
@@ -142,7 +146,7 @@ namespace chinesechree
                     {
                         if (FOE(Board[a, b], Board[c, b]))
                         {
-                            Console.Write("(" + c + "," + b + ")");
+                            //Console.Write("(" + c + "," + b + ")");
                             position.Add(c + "," + b);
 
                         }
@@ -150,52 +154,37 @@ namespace chinesechree
                     }
                     if (Board[c, b] == null)
                     {
-                        Console.Write("(" + c + "," + b + ")");
+                        //Console.Write("(" + c + "," + b + ")");
                         position.Add(c + "," + b);
                     }
                 }
-            for (int i = 0; i < position.Count; i++)
-            {
-                Console.Write(position[i]);
-            }
+           
 
             return position;
         }
             
         
-        public static void mamovefunction(Chess[,] Board, string str1, ArrayList position)
+        public static ArrayList mamovefunction(int a, int b, Chess[,] Board, ArrayList position)
         {
-            int a = 0;
-            int b = 0;
-            int c = 0;
-            int d = 0;
+            
+            int c ;
+            int d ;
 
-            for (int i = 0; i < 10; i++)
-            {
-                for (int j = 0; j < 9; j++)
-                {
-                    if (Board[i, j].getname().Contains(str1))
-                    {
-                        a = i;
-                        b = j;
-                        break;
-                    }
-                }
-            }
+            
             //Console.Write("You can go : ");
 
             //down
 
             if (a + 1 >= 0 && a + 1 <= 9 && b >= 0 && b <= 8)
             {
-                if (Board[a + 1, b].getname().Contains("+"))
+                if (Board[a + 1, b] == null)
                 {
                     if (a + 2 >= 0 && a + 2 <= 9 && b - 1 >= 0 && b - 1 <= 8)
                     {
                         c = a + 2;
                         d = b - 1;
 
-                        if (Board[c, d].getname().Contains("+") != true)
+                        if (Board[c, d] != null)
                         {
                             if (FOE(Board[a, b], Board[c, d]))
                             {
@@ -205,7 +194,7 @@ namespace chinesechree
                             }
 
                         }
-                        if (Board[c, d].getname().Contains("+"))
+                        if (Board[c, d] == null)
                         {
 
                             //Console.Write("(" + c + "," + d + ")");
@@ -217,7 +206,7 @@ namespace chinesechree
                     {
                         c = a + 2;
                         d = b + 1;
-                        if (Board[c, d].getname().Contains("+") != true)
+                        if (Board[c, d] != null)
                         {
                             if (FOE(Board[a, b], Board[c, d]))
                             {
@@ -228,7 +217,7 @@ namespace chinesechree
                             }
 
                         }
-                        if (Board[c, d].getname().Contains("+"))
+                        if (Board[c, d] == null)
                         {
 
                             //Console.Write("(" + c + "," + d + ")");
@@ -244,14 +233,14 @@ namespace chinesechree
 
                 if (a - 1 >= 0 && a - 1 <= 9 && b >= 0 && b <= 8)
                 {
-                    if (Board[a - 1, b].getname().Contains("+"))
+                    if (Board[a - 1, b] == null)
                     {
                         if (a - 2 >= 0 && a - 2 <= 9 && b - 1 >= 0 && b - 1 <= 8)
                         {
                             c = a - 2;
                             d = b - 1;
 
-                            if (Board[c, d].getname().Contains("+") != true)
+                            if (Board[c, d] != null)
                             {
                                 if (FOE(Board[a, b], Board[c, d]))
                                 {
@@ -261,7 +250,7 @@ namespace chinesechree
                                 }
 
                             }
-                            if (Board[c, d].getname().Contains("+"))
+                            if (Board[c, d] == null)
                             {
 
                                 //Console.Write("(" + c + "," + d + ")");
@@ -272,7 +261,7 @@ namespace chinesechree
                         {
                             c = a - 2;
                             d = b + 1;
-                            if (Board[c, d].getname().Contains("+") != true)
+                            if (Board[c, d] != null)
                             {
                                 if (FOE(Board[a, b], Board[c, d]))
                                 {
@@ -283,7 +272,7 @@ namespace chinesechree
                                 }
 
                             }
-                            if (Board[c, d].getname().Contains("+"))
+                            if (Board[c, d] == null)
                             {
 
                                 //Console.Write("(" + c + "," + d + ")");
@@ -293,6 +282,8 @@ namespace chinesechree
 
 
                     }
+
+
                 }
 
 
@@ -301,14 +292,14 @@ namespace chinesechree
 
                 if (a >= 0 && a <= 9 && b + 1 >= 0 && b + 1 <= 8)
                 {
-                    if (Board[a, b + 1].getname().Contains("+"))
+                    if (Board[a, b + 1] == null)
                     {
                         if (a + 1 >= 0 && a + 1 <= 9 && b + 2 >= 0 && b + 2 <= 8)
                         {
                             c = a + 1;
                             d = b + 2;
 
-                            if (Board[c, d].getname().Contains("+") != true)
+                            if (Board[c, d] != null)
                             {
                                 if (FOE(Board[a, b], Board[c, d]))
                                 {
@@ -318,7 +309,7 @@ namespace chinesechree
                                 }
 
                             }
-                            if (Board[c, d].getname().Contains("+"))
+                            if (Board[c, d] == null)
                             {
 
                                 //Console.Write("(" + c + "," + d + ")");
@@ -330,7 +321,7 @@ namespace chinesechree
                         {
                             c = a - 1;
                             d = b + 2;
-                            if (Board[c, d].getname().Contains("+") != true)
+                            if (Board[c, d] != null)
                             {
                                 if (FOE(Board[a, b], Board[c, d]))
                                 {
@@ -340,7 +331,7 @@ namespace chinesechree
                                 }
 
                             }
-                            if (Board[c, d].getname().Contains("+"))
+                            if (Board[c, d] == null)
                             {
 
                                 //Console.Write("(" + c + "," + d + ")");
@@ -358,14 +349,14 @@ namespace chinesechree
 
                 if (a >= 0 && a <= 9 && b + 1 >= 0 && b + 1 <= 8)
                 {
-                    if (Board[a, b - 1].getname().Contains("+"))
+                    if (Board[a, b - 1] == null)
                     {
                         if (a + 1 >= 0 && a + 1 <= 9 && b - 2 >= 0 && b - 2 <= 8)
                         {
                             c = a + 1;
                             d = b - 2;
 
-                            if (Board[c, d].getname().Contains("+") != true)
+                            if (Board[c, d] != null)
                             {
                                 if (FOE(Board[a, b], Board[c, d]))
                                 {
@@ -374,7 +365,7 @@ namespace chinesechree
                                 }
 
                             }
-                            if (Board[c, d].getname().Contains("+"))
+                            if (Board[c, d] == null)
                             {
                                 position.Add(c + "," + d);
                                 //Console.Write("(" + c + "," + d + ")");
@@ -386,7 +377,7 @@ namespace chinesechree
                         {
                             c = a - 1;
                             d = b - 2;
-                            if (Board[c, d].getname().Contains("+") != true)
+                            if (Board[c, d] != null)
                             {
                                 if (FOE(Board[a, b], Board[c, d]))
                                 {
@@ -395,7 +386,7 @@ namespace chinesechree
                                 }
 
                             }
-                            if (Board[c, d].getname().Contains("+"))
+                            if (Board[c, d] == null)
                             {
 
                                 //Console.Write("(" + c + "," + d + ")");
@@ -407,30 +398,19 @@ namespace chinesechree
 
                     }
                 }
+            return position;
 
-            }
+        }
         
 
-        public static void xiangmovefunction(Chess[,] Board, string str1, ArrayList position)
+        public static ArrayList xiangmovefunction(int a, int b, Chess[,] Board, ArrayList position)
         {
-            int a = 0;
-            int b = 0;
-            int c = 0;
-            int d = 0;
+        
+            int c ;
+            int d ;
 
-            for (int i = 0; i < 10; i++)
-            {
-                for (int j = 0; j < 9; j++)
-                {
-                    if (Board[i, j].getname().Contains(str1))
-                    {
-                        a = i;
-                        b = j;
-                        break;
-                    }
-                }
-            }
-            Console.Write("You can go : ");
+       
+            //Console.Write("You can go : ");
 
             if (Board[a, b].getcolor() == "red")
             {
@@ -438,7 +418,7 @@ namespace chinesechree
                 {
                     c = a + 2;
                     d = b + 2;
-                    if (Board[c, d].getname().Contains("+") != true)
+                    if (Board[c, d] != null)
                     {
                         if (FOE(Board[a, b], Board[c, d]))
                         {
@@ -447,7 +427,7 @@ namespace chinesechree
                         }
 
                     }
-                    if (Board[c, d].getname().Contains("+"))
+                    if (Board[c, d] == null)
                     {
                         //Console.Write("(" + c + "," + d + ")");
                         position.Add(c + "," + d);
@@ -462,7 +442,7 @@ namespace chinesechree
                 {
                     c = a + 2;
                     d = b - 2;
-                    if (Board[c, d].getname().Contains("+") != true)
+                    if (Board[c, d] != null)
                     {
                         if (FOE(Board[a, b], Board[c, d]))
                         {
@@ -471,7 +451,7 @@ namespace chinesechree
                         }
 
                     }
-                    if (Board[c, d].getname().Contains("+"))
+                    if (Board[c, d] == null)
                     {
                         //Console.Write("(" + c + "," + d + ")");
                         position.Add(c + "," + d);
@@ -485,7 +465,7 @@ namespace chinesechree
                 {
                     c = a - 2;
                     d = b + 2;
-                    if (Board[c, d].getname().Contains("+") != true)
+                    if (Board[c, d] != null)
                     {
                         if (FOE(Board[a, b], Board[c, d]))
                         {
@@ -494,7 +474,7 @@ namespace chinesechree
                         }
 
                     }
-                    if (Board[c, d].getname().Contains("+"))
+                    if (Board[c, d] == null)
                     {
                         //Console.Write("(" + c + "," + d + ")");
                         position.Add(c + "," + d);
@@ -508,7 +488,7 @@ namespace chinesechree
                 {
                     c = a - 2;
                     d = b - 2;
-                    if (Board[c, d].getname().Contains("+") != true)
+                    if (Board[c, d] != null)
                     {
                         if (FOE(Board[a, b], Board[c, d]))
                         {
@@ -517,7 +497,7 @@ namespace chinesechree
                         }
 
                     }
-                    if (Board[c, d].getname().Contains("+"))
+                    if (Board[c, d] == null)
                     {
                         //Console.Write("(" + c + "," + d + ")");
                         position.Add(c + "," + d);
@@ -535,7 +515,7 @@ namespace chinesechree
                 {
                     c = a + 2;
                     d = b + 2;
-                    if (Board[c, d].getname().Contains("+") != true)
+                    if (Board[c, d] != null)
                     {
                         if (FOE(Board[a, b], Board[c, d]))
                         {
@@ -544,7 +524,7 @@ namespace chinesechree
                         }
 
                     }
-                    if (Board[c, d].getname().Contains("+"))
+                    if (Board[c, d] == null)
                     {
                         //Console.Write("(" + c + "," + d + ")");
                         position.Add(c + "," + d);
@@ -558,7 +538,7 @@ namespace chinesechree
                 {
                     c = a + 2;
                     d = b - 2;
-                    if (Board[c, d].getname().Contains("+") != true)
+                    if (Board[c, d] != null)
                     {
                         if (FOE(Board[a, b], Board[c, d]))
                         {
@@ -567,7 +547,7 @@ namespace chinesechree
                         }
 
                     }
-                    if (Board[c, d].getname().Contains("+"))
+                    if (Board[c, d] == null)
                     {
                         //Console.Write("(" + c + "," + d + ")");
                         position.Add(c + "," + d);
@@ -581,7 +561,7 @@ namespace chinesechree
                 {
                     c = a - 2;
                     d = b + 2;
-                    if (Board[c, d].getname().Contains("+") != true)
+                    if (Board[c, d] != null)
                     {
                         if (FOE(Board[a, b], Board[c, d]))
                         {
@@ -590,7 +570,7 @@ namespace chinesechree
                         }
 
                     }
-                    if (Board[c, d].getname().Contains("+"))
+                    if (Board[c, d] == null)
                     {
                         //Console.Write("(" + c + "," + d + ")");
                         position.Add(c + "," + d);
@@ -605,7 +585,7 @@ namespace chinesechree
                 {
                     c = a - 2;
                     d = b - 2;
-                    if (Board[c, d].getname().Contains("+") != true)
+                    if (Board[c, d] != null)
                     {
                         if (FOE(Board[a, b], Board[c, d]))
                         {
@@ -614,7 +594,7 @@ namespace chinesechree
                         }
 
                     }
-                    if (Board[c, d].getname().Contains("+"))
+                    if (Board[c, d] == null)
                     {
 
                         //Console.Write("(" + c + "," + d + ")");
@@ -624,29 +604,18 @@ namespace chinesechree
 
                 }
             }
+            return position;
         }
 
 
-        public static void shimovefunction(Chess[,] Board, string str1, ArrayList position)
+        public static ArrayList shimovefunction(int a, int b, Chess[,] Board, ArrayList position)
         {
-            int a = 0;
-            int b = 0;
-            int c = 0;
-            int d = 0;
+      
+            int c ;
+            int d ;
 
-            for (int i = 0; i < 10; i++)
-            {
-                for (int j = 0; j < 9; j++)
-                {
-                    if (Board[i, j].getname().Contains(str1))
-                    {
-                        a = i;
-                        b = j;
-                        break;
-                    }
-                }
-            }
-            Console.Write("You can go : ");
+          
+            //Console.Write("You can go : ");
 
             if (Board[a, b].getcolor() == "red")
             {
@@ -654,7 +623,7 @@ namespace chinesechree
                 {
                     c = a + 1;
                     d = b + 1;
-                    if (Board[c, d].getname().Contains("+") != true)
+                    if (Board[c, d] != null)
                     {
                         if (FOE(Board[a, b], Board[c, d]))
                         {
@@ -663,7 +632,7 @@ namespace chinesechree
                         }
 
                     }
-                    if (Board[c, d].getname().Contains("+"))
+                    if (Board[c, d] == null)
                     {
 
                         //Console.Write("(" + c + "," + d + ")");
@@ -676,7 +645,7 @@ namespace chinesechree
                 {
                     c = a + 1;
                     d = b - 1;
-                    if (Board[c, d].getname().Contains("+") != true)
+                    if (Board[c, d] != null)
                     {
                         if (FOE(Board[a, b], Board[c, d]))
                         {
@@ -685,7 +654,7 @@ namespace chinesechree
                         }
 
                     }
-                    if (Board[c, d].getname().Contains("+"))
+                    if (Board[c, d] == null)
                     {
 
                         //Console.Write("(" + c + "," + d + ")");
@@ -697,7 +666,7 @@ namespace chinesechree
                 {
                     c = a - 1;
                     d = b + 1;
-                    if (Board[c, d].getname().Contains("+") != true)
+                    if (Board[c, d] != null)
                     {
                         if (FOE(Board[a, b], Board[c, d]))
                         {
@@ -706,7 +675,7 @@ namespace chinesechree
                         }
 
                     }
-                    if (Board[c, d].getname().Contains("+"))
+                    if (Board[c, d] == null)
                     {
 
                         //Console.Write("(" + c + "," + d + ")");
@@ -718,7 +687,7 @@ namespace chinesechree
                 {
                     c = a - 1;
                     d = b - 1;
-                    if (Board[c, d].getname().Contains("+") != true)
+                    if (Board[c, d] != null)
                     {
                         if (FOE(Board[a, b], Board[c, d]))
                         {
@@ -727,7 +696,7 @@ namespace chinesechree
                         }
 
                     }
-                    if (Board[c, d].getname().Contains("+"))
+                    if (Board[c, d] == null)
                     {
 
                         //Console.Write("(" + c + "," + d + ")");
@@ -745,7 +714,7 @@ namespace chinesechree
                 {
                     c = a + 1;
                     d = b + 1;
-                    if (Board[c, d].getname().Contains("+") != true)
+                    if (Board[c, d] != null)
                     {
                         if (FOE(Board[a, b], Board[c, d]))
                         {
@@ -754,7 +723,7 @@ namespace chinesechree
                         }
 
                     }
-                    if (Board[c, d].getname().Contains("+"))
+                    if (Board[c, d] == null)
                     {
 
                         //Console.Write("(" + c + "," + d + ")");
@@ -766,7 +735,7 @@ namespace chinesechree
                 {
                     c = a + 1;
                     d = b - 1;
-                    if (Board[c, d].getname().Contains("+") != true)
+                    if (Board[c, d] != null)
                     {
                         if (FOE(Board[a, b], Board[c, d]))
                         {
@@ -775,7 +744,7 @@ namespace chinesechree
                         }
 
                     }
-                    if (Board[c, d].getname().Contains("+"))
+                    if (Board[c, d] == null)
                     {
 
                         //Console.Write("(" + c + "," + d + ")");
@@ -788,7 +757,7 @@ namespace chinesechree
                 {
                     c = a - 1;
                     d = b + 1;
-                    if (Board[c, d].getname().Contains("+") != true)
+                    if (Board[c, d] != null)
                     {
                         if (FOE(Board[a, b], Board[c, d]))
                         {
@@ -797,7 +766,7 @@ namespace chinesechree
                         }
 
                     }
-                    if (Board[c, d].getname().Contains("+"))
+                    if (Board[c, d] == null)
                     {
 
                         //Console.Write("(" + c + "," + d + ")");
@@ -810,7 +779,7 @@ namespace chinesechree
                 {
                     c = a - 1;
                     d = b - 1;
-                    if (Board[c, d].getname().Contains("+") != true)
+                    if (Board[c, d] != null)
                     {
                         if (FOE(Board[a, b], Board[c, d]))
                         {
@@ -819,7 +788,7 @@ namespace chinesechree
                         }
 
                     }
-                    if (Board[c, d].getname().Contains("+"))
+                    if (Board[c, d] == null)
                     {
 
                         //Console.Write("(" + c + "," + d + ")");
@@ -829,27 +798,17 @@ namespace chinesechree
                 }
 
             }
+
+            return position;
         }
 
-        public static void shuaimovefunction(Chess[,] Board, string str1, ArrayList position)
+        public static ArrayList shuaimovefunction(int a, int b, Chess[,] Board, ArrayList position)
         {
-            int a = 0;
-            int b = 0;
-            int c = 0;
-            int d = 0;
+       
+            int c ;
+            int d ;
 
-            for (int i = 0; i < 10; i++)
-            {
-                for (int j = 0; j < 9; j++)
-                {
-                    if (Board[i, j].getname().Contains(str1))
-                    {
-                        a = i;
-                        b = j;
-                        break;
-                    }
-                }
-            }
+
             //Console.Write("You can go : ");
 
             if (a + 1 >= 0 && a + 1 <= 2 && b >= 3 && b <= 5)
@@ -857,7 +816,7 @@ namespace chinesechree
                 c = a + 1;
                 d = b;
 
-                if (Board[c, d].getname().Contains("+") != true)
+                if (Board[c, d] != null)
                 {
                     if (FOE(Board[a, b], Board[c, d]))
                     {
@@ -866,7 +825,7 @@ namespace chinesechree
                     }
 
                 }
-                if (Board[c, d].getname().Contains("+"))
+                if (Board[c, d] == null)
                 {
 
                     //Console.Write("(" + c + "," + d + ")");
@@ -879,7 +838,7 @@ namespace chinesechree
                 c = a - 1;
                 d = b;
 
-                if (Board[c, d].getname().Contains("+") != true)
+                if (Board[c, d] != null)
                 {
                     if (FOE(Board[a, b], Board[c, d]))
                     {
@@ -888,7 +847,7 @@ namespace chinesechree
                     }
 
                 }
-                if (Board[c, d].getname().Contains("+"))
+                if (Board[c, d] == null)
                 {
 
                     //Console.Write("(" + c + "," + d + ")");
@@ -901,7 +860,7 @@ namespace chinesechree
                 c = a;
                 d = b + 1;
 
-                if (Board[c, d].getname().Contains("+") != true)
+                if (Board[c, d] != null)
                 {
                     if (FOE(Board[a, b], Board[c, d]))
                     {
@@ -910,7 +869,7 @@ namespace chinesechree
                     }
 
                 }
-                if (Board[c, d].getname().Contains("+"))
+                if (Board[c, d] == null)
                 {
 
                     //Console.Write("(" + c + "," + d + ")");
@@ -923,7 +882,7 @@ namespace chinesechree
                 c = a;
                 d = b - 1;
 
-                if (Board[c, d].getname().Contains("+") != true)
+                if (Board[c, d] != null)
                 {
                     if (FOE(Board[a, b], Board[c, d]))
                     {
@@ -932,7 +891,7 @@ namespace chinesechree
                     }
 
                 }
-                if (Board[c, d].getname().Contains("+"))
+                if (Board[c, d] == null)
                 {
 
                     //Console.Write("(" + c + "," + d + ")");
@@ -941,27 +900,15 @@ namespace chinesechree
                 }
 
             }
+            return position;
         }
 
-        public static void jiangmovefunction(Chess[,] Board, string str1, ArrayList position)
+        public static ArrayList jiangmovefunction(int a, int b, Chess[,] Board, ArrayList position)
         {
-            int a = 0;
-            int b = 0;
-            int c = 0;
-            int d = 0;
+    
+            int c ;
+            int d ;
 
-            for (int i = 0; i < 10; i++)
-            {
-                for (int j = 0; j < 9; j++)
-                {
-                    if (Board[i, j].getname().Contains(str1))
-                    {
-                        a = i;
-                        b = j;
-                        break;
-                    }
-                }
-            }
             //Console.Write("You can go : ");
 
             if (a + 1 >= 7 && a + 1 <= 9 && b >= 3 && b <= 5)
@@ -969,7 +916,7 @@ namespace chinesechree
                 c = a + 1;
                 d = b;
 
-                if (Board[c, d].getname().Contains("+") != true)
+                if (Board[c, d] != null)
                 {
                     if (FOE(Board[a, b], Board[c, d]))
                     {
@@ -978,7 +925,7 @@ namespace chinesechree
                     }
 
                 }
-                if (Board[c, d].getname().Contains("+"))
+                if (Board[c, d] == null)
                 {
 
                     //Console.Write("(" + c + "," + d + ")");
@@ -991,7 +938,7 @@ namespace chinesechree
                 c = a - 1;
                 d = b;
 
-                if (Board[c, d].getname().Contains("+") != true)
+                if (Board[c, d] != null)
                 {
                     if (FOE(Board[a, b], Board[c, d]))
                     {
@@ -1000,7 +947,7 @@ namespace chinesechree
                     }
 
                 }
-                if (Board[c, d].getname().Contains("+"))
+                if (Board[c, d] == null)
                 {
 
                     //Console.Write("(" + c + "," + d + ")");
@@ -1013,7 +960,7 @@ namespace chinesechree
                 c = a;
                 d = b + 1;
 
-                if (Board[c, d].getname().Contains("+") != true)
+                if (Board[c, d] != null)
                 {
                     if (FOE(Board[a, b], Board[c, d]))
                     {
@@ -1022,7 +969,7 @@ namespace chinesechree
                     }
 
                 }
-                if (Board[c, d].getname().Contains("+"))
+                if (Board[c, d] == null)
                 {
 
                     //Console.Write("(" + c + "," + d + ")");
@@ -1035,7 +982,7 @@ namespace chinesechree
                 c = a;
                 d = b - 1;
 
-                if (Board[c, d].getname().Contains("+") != true)
+                if (Board[c, d] != null)
                 {
                     if (FOE(Board[a, b], Board[c, d]))
                     {
@@ -1044,7 +991,7 @@ namespace chinesechree
                     }
 
                 }
-                if (Board[c, d].getname().Contains("+"))
+                if (Board[c, d] == null)
                 {
 
                     //Console.Write("(" + c + "," + d + ")");
@@ -1053,27 +1000,16 @@ namespace chinesechree
                 }
 
             }
+            return position;
         }
 
-        public static void bingmovefunction(Chess[,] Board, string str1, ArrayList position)
+        public static ArrayList bingmovefunction(int a, int b, Chess[,] Board, ArrayList position)
         {
-            int a = 0;
-            int b = 0;
-            int c = 0;
-            int d = 0;
 
-            for (int i = 0; i < 10; i++)
-            {
-                for (int j = 0; j < 9; j++)
-                {
-                    if (Board[i, j].getname().Contains(str1))
-                    {
-                        a = i;
-                        b = j;
-                        break;
-                    }
-                }
-            }
+            int c ;
+            int d ;
+
+      
 
             //Console.Write("You can go : ");
             if (Board[a, b].getcolor() == "red")
@@ -1084,7 +1020,7 @@ namespace chinesechree
                     c = a + 1;
                     d = b;
 
-                    if (Board[c, d].getname().Contains("+") != true)
+                    if (Board[c, d] != null)
                     {
                         if (FOE(Board[a, b], Board[c, d]))
                         {
@@ -1093,7 +1029,7 @@ namespace chinesechree
                         }
 
                     }
-                    if (Board[c, d].getname().Contains("+"))
+                    if (Board[c, d] == null)
                     {
 
                         //Console.Write("(" + c + "," + d + ")");
@@ -1105,7 +1041,7 @@ namespace chinesechree
                     c = a + 1;
                     d = b;
 
-                    if (Board[c, d].getname().Contains("+") != true)
+                    if (Board[c, d] != null)
                     {
                         if (FOE(Board[a, b], Board[c, d]))
                         {
@@ -1114,7 +1050,7 @@ namespace chinesechree
                         }
 
                     }
-                    if (Board[c, d].getname().Contains("+"))
+                    if (Board[c, d] == null)
                     {
 
                         //Console.Write("(" + c + "," + d + ")");
@@ -1127,7 +1063,7 @@ namespace chinesechree
                     c = a;
                     d = b + 1;
 
-                    if (Board[c, d].getname().Contains("+") != true)
+                    if (Board[c, d] != null)
                     {
                         if (FOE(Board[a, b], Board[c, d]))
                         {
@@ -1136,7 +1072,7 @@ namespace chinesechree
                         }
 
                     }
-                    if (Board[c, d].getname().Contains("+"))
+                    if (Board[c, d] == null)
                     {
 
                        // Console.Write("(" + c + "," + d + ")");
@@ -1150,7 +1086,7 @@ namespace chinesechree
                     c = a;
                     d = b - 1;
 
-                    if (Board[c, d].getname().Contains("+") != true)
+                    if (Board[c, d] != null)
                     {
                         if (FOE(Board[a, b], Board[c, d]))
                         {
@@ -1159,7 +1095,7 @@ namespace chinesechree
                         }
 
                     }
-                    if (Board[c, d].getname().Contains("+"))
+                    if (Board[c, d] == null)
                     {
 
                         // Console.Write("(" + c + "," + d + ")");
@@ -1176,7 +1112,7 @@ namespace chinesechree
                     c = a - 1;
                     d = b;
 
-                    if (Board[c, d].getname().Contains("+") != true)
+                    if (Board[c, d] != null)
                     {
                         if (FOE(Board[a, b], Board[c, d]))
                         {
@@ -1185,7 +1121,7 @@ namespace chinesechree
                         }
 
                     }
-                    if (Board[c, d].getname().Contains("+"))
+                    if (Board[c, d] == null)
                     {
 
                         //  Console.Write("(" + c + "," + d + ")");
@@ -1197,7 +1133,7 @@ namespace chinesechree
                     c = a - 1;
                     d = b;
 
-                    if (Board[c, d].getname().Contains("+") != true)
+                    if (Board[c, d] != null)
                     {
                         if (FOE(Board[a, b], Board[c, d]))
                         {
@@ -1206,7 +1142,7 @@ namespace chinesechree
                         }
 
                     }
-                    if (Board[c, d].getname().Contains("+"))
+                    if (Board[c, d] == null)
                     {
 
                         //Console.Write("(" + c + "," + d + ")");
@@ -1218,7 +1154,7 @@ namespace chinesechree
                     c = a;
                     d = b + 1;
 
-                    if (Board[c, d].getname().Contains("+") != true)
+                    if (Board[c, d] != null)
                     {
                         if (FOE(Board[a, b], Board[c, d]))
                         {
@@ -1227,7 +1163,7 @@ namespace chinesechree
                         }
 
                     }
-                    if (Board[c, d].getname().Contains("+"))
+                    if (Board[c, d] == null)
                     {
 
                         //Console.Write("(" + c + "," + d + ")");
@@ -1240,7 +1176,7 @@ namespace chinesechree
                     c = a;
                     d = b - 1;
 
-                    if (Board[c, d].getname().Contains("+") != true)
+                    if (Board[c, d] != null)
                     {
                         if (FOE(Board[a, b], Board[c, d]))
                         {
@@ -1249,7 +1185,7 @@ namespace chinesechree
                         }
 
                     }
-                    if (Board[c, d].getname().Contains("+"))
+                    if (Board[c, d] == null)
                     {
 
                         //Console.Write("(" + c + "," + d + ")");
@@ -1257,41 +1193,30 @@ namespace chinesechree
                     }
                 }
             }
+            return position;
         }
 
-        public static void paomovefunction(Chess[,] Board, string str1, ArrayList position)
+        public static ArrayList paomovefunction(int a, int b, Chess[,] Board, ArrayList position)
         {
-            int a = 0;
-            int b = 0;
-            int c = 0;
-            int d = 0;
 
-            for (int i = 0; i < 10; i++)
-            {
-                for (int j = 0; j < 9; j++)
-                {
-                    if (Board[i, j].getname().Contains(str1))
-                    {
-                        a = i;
-                        b = j;
-                        break;
-                    }
-                }
-            }
+            int c ;
+            int d ;
+
+   
             //Console.Write("You can go : ");
             for (d = b + 1; d < 9; d++)
             {
-                if (Board[a, d].getname().Contains("+") != true)
+                if (Board[a, d] != null)
                 {
 
                     for (int i = d + 1; i <= 8; d = i++)
                     {
-                        if (Board[a, i].getname().Contains("+") != true)
+                        if (Board[a, i] != null)
                         {
                             if (FOE(Board[a, b], Board[a, i]))
                             {
                                 //Console.Write("(" + a + "," + i + ")");
-                                position.Add(c + "," + d);
+                                position.Add(a + "," + i);
                             }
                             break;
                         }
@@ -1300,10 +1225,10 @@ namespace chinesechree
 
                     break;
                 }
-                if (Board[a, d].getname().Contains("+"))
+                if (Board[a, d] == null)
                 {
                     //Console.Write("(" + a + "," + d + ")");
-                    position.Add(c + "," + d);
+                    position.Add(a + "," + d);
 
                 }
 
@@ -1311,18 +1236,18 @@ namespace chinesechree
             }
             for (d = b - 1; d >= 0; d--)
             {
-                if (Board[a, d].getname().Contains("+") != true)
+                if (Board[a, d] != null)
                 {
                     
                     for (int i = d - 1; i >= 0; i--)
                     {
                         
-                        if (Board[a, i].getname().Contains("+") != true)
+                        if (Board[a, i] != null)
                         {
                             if (FOE(Board[a, b], Board[a, i]))
                             {
                                 //Console.Write("(" + a + "," + i + ")");
-                                position.Add(c + "," + d);
+                                position.Add(a + "," + i);
                             }
                             break;
                         }
@@ -1332,26 +1257,26 @@ namespace chinesechree
 
                     break;
                 }
-                if (Board[a, d].getname().Contains("+"))
+                if (Board[a, d] == null)
                 {
                     //Console.Write("(" + a + "," + d + ")");
-                    position.Add(c + "," + d);
+                    position.Add(a + "," + d);
                 }
             }
             for (c = a + 1; c < 10; c++)
             {
-                if (Board[c, b].getname().Contains("+") != true)
+                if (Board[c, b] != null)
                 {
 
                     for (int i = c + 1; i <= 9; i++)
                     {
 
-                        if (Board[i, b].getname().Contains("+") != true)
+                        if (Board[i, b] != null)
                         {
                             if (FOE(Board[a, b], Board[i, b]))
                             {
                                 //Console.Write("(" + i + "," + b + ")");
-                                position.Add(c + "," + d);
+                                position.Add(i + "," + b);
                             }
                             break;
                         }
@@ -1360,26 +1285,26 @@ namespace chinesechree
 
                     break;
                 }
-                if (Board[c, b].getname().Contains("+"))
+                if (Board[c, b] == null)
                 {
                     //Console.Write("(" + c + "," + b + ")");
-                    position.Add(c + "," + d); ;
+                    position.Add(c + "," + b); 
                 }
             }
             for (c = a - 1; c >= 0; c--)
             {
 
-                if (Board[c, b].getname().Contains("+") != true)
+                if (Board[c, b] != null)
                 {
 
                     for (int i = c - 1; i >= 0; i--)
                     {
-                        if (Board[i, b].getname().Contains("+") != true)
+                        if (Board[i, b] != null)
                         {
                             if (FOE(Board[a, b], Board[i, b]))
                             {
                                 //Console.Write("(" + i + "," + b + ")");
-                                position.Add(c + "," + d);
+                                position.Add(i + "," + b);
                             }
                             break;
                         }
@@ -1388,16 +1313,16 @@ namespace chinesechree
 
                     break;
                 }
-                if (Board[c, b].getname().Contains("+"))
+                if (Board[c, b] == null)
                 {
                     //Console.Write("(" + c + "," + b + ")");
-                    position.Add(c + "," + d);
+                    position.Add(c + "," + b);
                 }
             }
-
+            return position;
         }
 
-        public static void canmove(string str, Chess[,] Board,gameBoard Gameboard)
+        public static ArrayList canmove(string str, Chess[,] Board,gameBoard Gameboard)
         {
             string[] sArray = str.Split(',');
             int a = Convert.ToInt32(sArray[0]);
@@ -1422,15 +1347,15 @@ namespace chinesechree
             if (str1.Contains("马"))
             {
 
-                mamovefunction(Board, str1, position);
-
+                mamovefunction(a, b, Board, position);
+                Gameboard.Showmove(position);
             }
 
             // xiang
             if (str1.Contains("像") || str1.Contains("相"))
             {
-                xiangmovefunction(Board, str1, position);
-
+                xiangmovefunction(a, b, Board, position);
+                Gameboard.Showmove(position);
             }
 
             // shi
@@ -1438,8 +1363,8 @@ namespace chinesechree
 
             if (str1.Contains("仕") || str1.Contains("士"))
             {
-                shimovefunction(Board, str1, position);
-             
+                shimovefunction(a, b, Board, position);
+                Gameboard.Showmove(position);
 
             }
 
@@ -1447,31 +1372,33 @@ namespace chinesechree
             if (str1.Contains("帅"))
             {
 
-                shuaimovefunction(Board, str1, position);
-     
+                shuaimovefunction(a, b, Board, position);
 
+                Gameboard.Showmove(position);
             }
 
             if (str1.Contains("将"))
             {
-                jiangmovefunction(Board, str1, position);
- 
+                jiangmovefunction(a, b, Board, position);
+                Gameboard.Showmove(position);
             }
 
 
 
             if (str1.Contains("兵") || str1.Contains("卒"))
             {
-                bingmovefunction(Board, str1, position);
+                bingmovefunction(a, b, Board, position);
+                Gameboard.Showmove(position);
 
             }
             if (str1.Contains("炮"))
             {
-                paomovefunction(Board, str1, position);
+                paomovefunction(a, b, Board, position);
+                Gameboard.Showmove(position);
 
             }
 
-        
+            return position;
         }
     }
 }

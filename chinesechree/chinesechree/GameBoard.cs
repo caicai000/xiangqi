@@ -21,19 +21,83 @@ namespace chinesechree
 
         public void Showmove(ArrayList position)
         {
+            Console.BackgroundColor = ConsoleColor.Yellow;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.WriteLine(" 0   1   2   3   4   5   6   7   8 ");
 
-           for(int i = 0; i < position.Count; i++)
+            for (int i = 0; i < 19; i++)
             {
-                string str = position[i].ToString();
-                string[] sArray = str.Split(',');
-                int a = Convert.ToInt32(sArray[0]);
-                int b = Convert.ToInt32(sArray[1]);
-                
-                Console.ForegroundColor = ConsoleColor.Green;
-                ShowGameBoard[a, b] = GameBoard[a, b];
+                Console.BackgroundColor = ConsoleColor.Yellow;
+
+                if (i % 2 == 0)
+                {
+                    Console.Write(i / 2);
+                }
+                else
+                {
+                    Console.Write(" ");
+                }
+
+                for (int j = 0; j < 17; j++)
+                {
+                    Console.BackgroundColor = ConsoleColor.Yellow;
+                    
+
+                    for (int k = 0; k < position.Count; k++)
+                    {
+                        string str = position[k].ToString();
+                        string[] sArray = str.Split(',');
+                        int a = Convert.ToInt32(sArray[0])*2;
+                        int b = Convert.ToInt32(sArray[1])*2;
+
+                        if(a == i && b == j)
+                        {
+                            Console.BackgroundColor = ConsoleColor.Green;
+                        }
+                    }
+                    
+                    Console.Write(ShowGameBoard[i, j]);
+                    if (j == 16)
+                    {
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.Write("\n");
+                    }
+                    
+                }
             }
-             
             
+               
+        }
+
+        public void print()
+        {
+            Console.BackgroundColor = ConsoleColor.Yellow;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.WriteLine(" 0   1   2   3   4   5   6   7   8 ");
+
+            for (int i = 0; i < 19; i++)
+            {
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                
+                if (i % 2 == 0)
+                {
+                    Console.Write(i / 2);
+                }
+                else
+                {
+                    Console.Write(" ");
+                }
+
+                for (int j = 0; j < 17; j++)
+                {
+                    Console.Write(ShowGameBoard[i, j]);
+                    if (j == 16)
+                    {
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.Write("\n");
+                    }
+                }
+            }
         }
 
 
@@ -431,31 +495,7 @@ namespace chinesechree
             ShowGameBoard[a, b] = name;
         }
 
-        public void print()
-        {
-            Console.BackgroundColor = ConsoleColor.Yellow;
-            Console.ForegroundColor = ConsoleColor.Black;
-            Console.Write(" 0   1   2   3   4   5   6   7   8 ");
-
-            for (int i = 0; i < 19; i++)
-            {
-                Console.Write("\n");
-                if (i % 2 == 0)
-                {
-                    Console.Write(i / 2);
-                }
-                else
-                {
-                    Console.Write(" ");
-                }
-
-                for (int j = 0; j < 17; j++)
-                {
-                    Console.Write(ShowGameBoard[i, j]);
-
-                }
-            }
-        }
+        
 
 
     }

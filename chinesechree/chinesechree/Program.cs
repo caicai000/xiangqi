@@ -2,6 +2,7 @@
 using static chinesechree.Classchess;
 using static chinesechree.movefunction;
 using chinesechree;
+using System.Collections;
 
 namespace Chinesechess
 {
@@ -126,44 +127,93 @@ namespace Chinesechess
 
             GameBoard.print();
 
-            while (jiang.getstate() == true && shuai.getstate() == true)
+            
+
+            
+           
+
+            do
             {
                 Console.BackgroundColor = ConsoleColor.Red;
                 Console.ForegroundColor = ConsoleColor.White;
 
                 Console.WriteLine("\nPlayer 1 Choose chress you want to move [a,b]");
                 string str1 = Console.ReadLine();
-                canmove(str1, Board,GameBoard);
+                Console.ForegroundColor = ConsoleColor.Black;
+                ArrayList a = canmove(str1, Board, GameBoard);
 
-              
+
 
                 Console.BackgroundColor = ConsoleColor.Red;
                 Console.ForegroundColor = ConsoleColor.White;
 
                 Console.WriteLine("\nPlayer 1 Choose position you want to move [a,b]");
                 string str2 = Console.ReadLine();
-                Move(str1, str2,Board);
+                Console.ForegroundColor = ConsoleColor.Black;
 
-              
+                if (a.Contains(str2))
+                {
+                    Move(str1, str2, Board, GameBoard);
+                }
+                else
+                {
+                    Console.WriteLine("Sorry, you can move there.");
+                }
 
+                if(jiang.getstate() == false)
+                {
+                    Console.WriteLine("帅 is Winner.");
+                }
+                if(shuai.getstate() == false)
+                {
+                    Console.WriteLine("将 is Winner.");
+                }
+
+            } while (jiang.getstate() == true && shuai.getstate() == true);
+
+
+
+
+
+            do
+            {
                 Console.BackgroundColor = ConsoleColor.Blue;
                 Console.ForegroundColor = ConsoleColor.White;
 
                 Console.WriteLine("\nPlayer 2 Choose chress you want to move [a,b]");
                 string str3 = Console.ReadLine();
-                //canmove(str3, Board);
+                Console.ForegroundColor = ConsoleColor.Black;
+                ArrayList b = canmove(str3, Board, GameBoard);
 
                 Console.BackgroundColor = ConsoleColor.Blue;
                 Console.ForegroundColor = ConsoleColor.White;
 
-                Console.WriteLine("\nPlayer 2 Choose position you want to move [a,b])");
+                Console.WriteLine("\nPlayer 2 Choose position you want to move [a,b]");
                 string str4 = Console.ReadLine();
-                Move(str3, str4, Board);
-               
+                Console.ForegroundColor = ConsoleColor.Black;
 
-                // break;
-            }
 
+                if (b.Contains(str4))
+                {
+                    Move(str3, str4, Board, GameBoard);
+                }
+                else
+                {
+                    Console.WriteLine("Sorry, you can move there.");
+                }
+
+                if (jiang.getstate() == false)
+                {
+                    Console.WriteLine("帅 is Winner.");
+                }
+                if (shuai.getstate() == false)
+                {
+                    Console.WriteLine("将 is Winner.");
+                }
+            } while (jiang.getstate() == true && shuai.getstate() == true);
+
+
+          
 
 
 
