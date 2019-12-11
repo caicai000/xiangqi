@@ -21,7 +21,7 @@ namespace Chinesechess
         {
             Chess[,] Board = new Chess[10, 9];
 
-            Chess che1 = new che("车", "red", 3,4, true);
+            Chess che1 = new che("车", "red", 0,0, true);
             Chess ma1 = new ma("马", "red", 0, 1, true);
             Chess xiang1 = new xiang("相", "red", 0,2, true);
             Chess shi1 = new shi("仕", "red", 0, 3, true);
@@ -34,7 +34,7 @@ namespace Chinesechess
             Chess pao2 = new che("炮", "red", 2, 7, true);
             Chess bing1 = new bing("兵", "red", 3, 0, true);
             Chess bing2 = new bing("兵", "red", 3, 2, true);
-           // Chess bing3 = new bing("兵", "red", 3, 4, true);
+            Chess bing3 = new bing("兵", "red", 3, 4, true);
             Chess bing4 = new bing("兵", "red", 3, 6, true);
             Chess bing5 = new bing("兵", "red", 3, 8, true);
 
@@ -51,7 +51,7 @@ namespace Chinesechess
             Chess pao4 = new che("炮", "black", 7, 7, true);
             Chess bing6 = new bing("卒", "black", 6, 0, true);
             Chess bing7 = new bing("卒", "black", 6, 2, true);
-           // Chess bing8 = new bing("卒", "black", 6, 4, true);
+            Chess bing8 = new bing("卒", "black", 6, 4, true);
             Chess bing9 = new bing("卒", "black", 6, 6, true);
             Chess bing10 = new bing("卒", "black", 6, 8, true);
 
@@ -66,7 +66,7 @@ namespace Chinesechess
             restart(che2, Board);
             restart(bing1, Board);
             restart(bing2, Board);
-            //restart(bing3, Board);
+            restart(bing3, Board);
             restart(bing4, Board);
             restart(bing5, Board);
             restart(pao1, Board);
@@ -83,7 +83,7 @@ namespace Chinesechess
             restart(che4, Board);
             restart(bing6, Board);
             restart(bing7, Board);
-           // restart(bing8, Board);
+            restart(bing8, Board);
             restart(bing9, Board);
             restart(bing10, Board);
             restart(pao3, Board);
@@ -104,7 +104,7 @@ namespace Chinesechess
             GameBoard.restart(pao2);
             GameBoard.restart(bing1);
             GameBoard.restart(bing2);
-            //GameBoard.restart(bing3);
+            GameBoard.restart(bing3);
             GameBoard.restart(bing4);
             GameBoard.restart(bing5);
 
@@ -121,7 +121,7 @@ namespace Chinesechess
             GameBoard.restart(pao4);
             GameBoard.restart(bing6);
             GameBoard.restart(bing7);
-           // GameBoard.restart(bing8);
+            GameBoard.restart(bing8);
             GameBoard.restart(bing9);
             GameBoard.restart(bing10);
 
