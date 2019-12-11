@@ -143,31 +143,43 @@ namespace Chinesechess
                 string str1;
                 while (true)
                 {
-                    str1 = Console.ReadLine();
-                    string[] sArray = str1.Split(',');
-                    int i = Convert.ToInt32(sArray[0]);
-                    int j = Convert.ToInt32(sArray[1]);
-                    if(Board[i,j]!= null)
-                    {
-                        if (Board[i, j].getcolor() == "black")
+                    Step1:
+                    try
+                    {  
+                        str1 = Console.ReadLine();
+                        string[] sArray = str1.Split(',');
+                        int i = Convert.ToInt32(sArray[0]);
+                        int j = Convert.ToInt32(sArray[1]);
+
+                        if (Board[i, j] != null)
                         {
-                            Console.WriteLine("You can not choose Black chess.");
+                            if (Board[i, j].getcolor() == "black")
+                            {
+                                Console.WriteLine("You can not choose Black chess.");
+                            }
                         }
-                    }
-                    
-                    if (Board[i, j] == null)
-                    {
-                        Console.WriteLine("You can not choose null chess.");
-                    }
-                    if (Board[i, j] != null)
-                    {
-                        if (Board[i, j].getcolor() == "red")
+
+                        if (Board[i, j] == null)
                         {
-                            break;
+                            Console.WriteLine("You can not choose null chess.");
                         }
+                        if (Board[i, j] != null)
+                        {
+                            if (Board[i, j].getcolor() == "red")
+                            {
+                                break;
+                            }
+                        }
+
+                     }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("Please re-enter the format a, b without brackets");
+                        goto Step1;
                     }
-                    
+
                 }
+
 
 
                 //step 2
@@ -181,16 +193,27 @@ namespace Chinesechess
 
                 while(true)
                 {
-                    str2 = Console.ReadLine();
-                    if (a.Contains(str2))
+                    Step2:
+                    try
                     {
-                        Move(str1, str2, Board, GameBoard);
-                        break;
+                        str2 = Console.ReadLine();
+                        if (a.Contains(str2))
+                        {
+                            Move(str1, str2, Board, GameBoard);
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Sorry, you can move there.");
+                        }
                     }
-                    else
+                    catch (Exception)
                     {
-                        Console.WriteLine("Sorry, you can move there.");
+                        Console.WriteLine("Please re-enter the format a, b without brackets");
+                        goto Step2;
                     }
+
+
                 }
 
                 Console.ForegroundColor = ConsoleColor.Black;
@@ -224,29 +247,39 @@ namespace Chinesechess
                 string str3;
                 while (true)
                 {
-                    str3 = Console.ReadLine();
-                    string[] sArray = str3.Split(',');
-                    int i = Convert.ToInt32(sArray[0]);
-                    int j = Convert.ToInt32(sArray[1]);
-                    if (Board[i, j] != null)
+                    Step3:
+                    try
                     {
-                        if (Board[i, j].getcolor() == "red")
+                        str3 = Console.ReadLine();
+                        string[] sArray = str3.Split(',');
+                        int i = Convert.ToInt32(sArray[0]);
+                        int j = Convert.ToInt32(sArray[1]);
+                        if (Board[i, j] != null)
                         {
-                            Console.WriteLine("You can not choose Red chess.");
+                            if (Board[i, j].getcolor() == "red")
+                            {
+                                Console.WriteLine("You can not choose Red chess.");
+                            }
                         }
+
+                        if (Board[i, j] == null)
+                        {
+                            Console.WriteLine("You can not choose null chess.");
+                        }
+                        if (Board[i, j] != null)
+                        {
+                            if (Board[i, j].getcolor() == "black")
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("Please re-enter the format a, b without brackets");
+                        goto Step3;
                     }
 
-                    if (Board[i, j] == null)
-                    {
-                        Console.WriteLine("You can not choose null chess.");
-                    }
-                    if (Board[i, j] != null)
-                    {
-                        if (Board[i, j].getcolor() == "black")
-                        {
-                            break;
-                        }
-                    }
                 }
 
 
@@ -262,17 +295,27 @@ namespace Chinesechess
 
                 while (true)
                 {
-                    str4 = Console.ReadLine();
-                    if (b.Contains(str4))
+                    Step4:
+                    try
                     {
-                        Move(str3, str4, Board, GameBoard);
-                        break;
+                        str4 = Console.ReadLine();
+                        if (b.Contains(str4))
+                        {
+                            Move(str3, str4, Board, GameBoard);
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Sorry, you can move there.");
+                        }
                     }
-                    else
+                    catch (Exception)
                     {
-                        Console.WriteLine("Sorry, you can move there.");
+                        Console.WriteLine("Please re-enter the format a, b without brackets");
+                        goto Step4;
                     }
                 }
+                    
                 Console.ForegroundColor = ConsoleColor.Black;
 
 
