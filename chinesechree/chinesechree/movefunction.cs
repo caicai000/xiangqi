@@ -276,32 +276,28 @@ namespace chinesechree
                         }
                     }
                 }
-                    if (a + 2 >= 0 && a + 2 <= 9 && b + 1 >= 0 && b + 1 <= 8)
+                if (a + 2 >= 0 && a + 2 <= 9 && b + 1 >= 0 && b + 1 <= 8)
+                {
+                    c = a + 2;
+                    d = b + 1;
+                    if (Board[c, d] != null)
                     {
-                        c = a + 2;
-                        d = b + 1;
-                        if (Board[c, d] != null)
+                        if (FOE(Board[a, b], Board[c, d]))
                         {
-                            if (FOE(Board[a, b], Board[c, d]))
-                            {
-
-
-                                //Console.Write("(" + c + "," + d + ")");
-                                position.Add(c + "," + d);
-                            }
-
-                        }
-                        if (Board[c, d] == null)
-                        {
-
                             //Console.Write("(" + c + "," + d + ")");
                             position.Add(c + "," + d);
                         }
 
-
                     }
-                }
+                    if (Board[c, d] == null)
+                    {
+                        //Console.Write("(" + c + "," + d + ")");
+                        position.Add(c + "," + d);
+                    }
 
+
+                }
+            }
 
                 //up
 
@@ -318,7 +314,6 @@ namespace chinesechree
                             {
                                 if (FOE(Board[a, b], Board[c, d]))
                                 {
-
                                     //Console.Write("(" + c + "," + d + ")");
                                     position.Add(c + "," + d);
                                 }
@@ -326,7 +321,6 @@ namespace chinesechree
                             }
                             if (Board[c, d] == null)
                             {
-
                                 //Console.Write("(" + c + "," + d + ")");
                                 position.Add(c + "," + d);
                             }
@@ -339,8 +333,6 @@ namespace chinesechree
                             {
                                 if (FOE(Board[a, b], Board[c, d]))
                                 {
-
-
                                     //Console.Write("(" + c + "," + d + ")");
                                     position.Add(c + "," + d);
                                 }
