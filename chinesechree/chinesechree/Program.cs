@@ -21,7 +21,7 @@ namespace Chinesechess
         {
             Chess[,] Board = new Chess[10, 9];
 
-            Chess che1 = new che("车", "red", 0, 0, true);
+            Chess che1 = new che("车", "red", 3,4, true);
             Chess ma1 = new ma("马", "red", 0, 1, true);
             Chess xiang1 = new xiang("相", "red", 0,2, true);
             Chess shi1 = new shi("仕", "red", 0, 3, true);
@@ -34,7 +34,7 @@ namespace Chinesechess
             Chess pao2 = new che("炮", "red", 2, 7, true);
             Chess bing1 = new bing("兵", "red", 3, 0, true);
             Chess bing2 = new bing("兵", "red", 3, 2, true);
-            Chess bing3 = new bing("兵", "red", 3, 4, true);
+           // Chess bing3 = new bing("兵", "red", 3, 4, true);
             Chess bing4 = new bing("兵", "red", 3, 6, true);
             Chess bing5 = new bing("兵", "red", 3, 8, true);
 
@@ -51,7 +51,7 @@ namespace Chinesechess
             Chess pao4 = new che("炮", "black", 7, 7, true);
             Chess bing6 = new bing("卒", "black", 6, 0, true);
             Chess bing7 = new bing("卒", "black", 6, 2, true);
-            Chess bing8 = new bing("卒", "black", 6, 4, true);
+           // Chess bing8 = new bing("卒", "black", 6, 4, true);
             Chess bing9 = new bing("卒", "black", 6, 6, true);
             Chess bing10 = new bing("卒", "black", 6, 8, true);
 
@@ -66,7 +66,7 @@ namespace Chinesechess
             restart(che2, Board);
             restart(bing1, Board);
             restart(bing2, Board);
-            restart(bing3, Board);
+            //restart(bing3, Board);
             restart(bing4, Board);
             restart(bing5, Board);
             restart(pao1, Board);
@@ -83,7 +83,7 @@ namespace Chinesechess
             restart(che4, Board);
             restart(bing6, Board);
             restart(bing7, Board);
-            restart(bing8, Board);
+           // restart(bing8, Board);
             restart(bing9, Board);
             restart(bing10, Board);
             restart(pao3, Board);
@@ -104,7 +104,7 @@ namespace Chinesechess
             GameBoard.restart(pao2);
             GameBoard.restart(bing1);
             GameBoard.restart(bing2);
-            GameBoard.restart(bing3);
+            //GameBoard.restart(bing3);
             GameBoard.restart(bing4);
             GameBoard.restart(bing5);
 
@@ -121,7 +121,7 @@ namespace Chinesechess
             GameBoard.restart(pao4);
             GameBoard.restart(bing6);
             GameBoard.restart(bing7);
-            GameBoard.restart(bing8);
+           // GameBoard.restart(bing8);
             GameBoard.restart(bing9);
             GameBoard.restart(bing10);
 
@@ -135,48 +135,122 @@ namespace Chinesechess
             do
             {
 
-                
+                //step 1
                 Console.BackgroundColor = ConsoleColor.Red;
                 Console.ForegroundColor = ConsoleColor.White;
 
                 Console.WriteLine("\nPlayer 1 Choose chress you want to move [a,b]");
-                string str1 = Console.ReadLine();
+                string str1;
+                while (true)
+                {
+                    str1 = Console.ReadLine();
+                    string[] sArray = str1.Split(',');
+                    int i = Convert.ToInt32(sArray[0]);
+                    int j = Convert.ToInt32(sArray[1]);
+                    if(Board[i,j]!= null)
+                    {
+                        if (Board[i, j].getcolor() == "black")
+                        {
+                            Console.WriteLine("You can not choose Black chess.");
+                        }
+                    }
+                    
+                    if (Board[i, j] == null)
+                    {
+                        Console.WriteLine("You can not choose null chess.");
+                    }
+                    if (Board[i, j] != null)
+                    {
+                        if (Board[i, j].getcolor() == "red")
+                        {
+                            break;
+                        }
+                    }
+                    
+                }
+
+
+                //step 2
                 Console.ForegroundColor = ConsoleColor.Black;
                 ArrayList a = canmove(str1, Board, GameBoard);
-
-
-
                 Console.BackgroundColor = ConsoleColor.Red;
                 Console.ForegroundColor = ConsoleColor.White;
 
                 Console.WriteLine("\nPlayer 1 Choose position you want to move [a,b]");
-                string str2 = Console.ReadLine();
+                string str2;
+
+                while(true)
+                {
+                    str2 = Console.ReadLine();
+                    if (a.Contains(str2))
+                    {
+                        Move(str1, str2, Board, GameBoard);
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Sorry, you can move there.");
+                    }
+                }
+
                 Console.ForegroundColor = ConsoleColor.Black;
 
-                if (a.Contains(str2))
+                if (jiang.getstate() != true || shuai.getstate() != true)
                 {
-                    Move(str1, str2, Board, GameBoard);
+                    
+                    Console.ForegroundColor = ConsoleColor.White;
+                    if (jiang.getstate() == false)
+                    {
+                        Console.BackgroundColor = ConsoleColor.Red;
+                        Console.WriteLine("帅 is Winner.");
+                    }
+                    if (shuai.getstate() == false)
+                    {
+                        Console.BackgroundColor = ConsoleColor.Blue;
+                        Console.WriteLine("将 is Winner.");
+                    }
+                    break;
                 }
-                else
-                {
-                    Console.WriteLine("Sorry, you can move there.");
-                }
+                
 
-                if(jiang.getstate() == false)
-                {
-                    Console.WriteLine("帅 is Winner.");
-                }
-                if(shuai.getstate() == false)
-                {
-                    Console.WriteLine("将 is Winner.");
-                }
 
-           
+                // step 3 
                 Console.BackgroundColor = ConsoleColor.Blue;
                 Console.ForegroundColor = ConsoleColor.White;
 
                 Console.WriteLine("\nPlayer 2 Choose chress you want to move [a,b]");
-                string str3 = Console.ReadLine();
+
+                
+                string str3;
+                while (true)
+                {
+                    str3 = Console.ReadLine();
+                    string[] sArray = str3.Split(',');
+                    int i = Convert.ToInt32(sArray[0]);
+                    int j = Convert.ToInt32(sArray[1]);
+                    if (Board[i, j] != null)
+                    {
+                        if (Board[i, j].getcolor() == "red")
+                        {
+                            Console.WriteLine("You can not choose Red chess.");
+                        }
+                    }
+
+                    if (Board[i, j] == null)
+                    {
+                        Console.WriteLine("You can not choose null chess.");
+                    }
+                    if (Board[i, j] != null)
+                    {
+                        if (Board[i, j].getcolor() == "black")
+                        {
+                            break;
+                        }
+                    }
+                }
+
+
+                //sept 4
                 Console.ForegroundColor = ConsoleColor.Black;
                 ArrayList b = canmove(str3, Board, GameBoard);
 
@@ -184,27 +258,41 @@ namespace Chinesechess
                 Console.ForegroundColor = ConsoleColor.White;
 
                 Console.WriteLine("\nPlayer 2 Choose position you want to move [a,b]");
-                string str4 = Console.ReadLine();
+                string str4;
+
+                while (true)
+                {
+                    str4 = Console.ReadLine();
+                    if (b.Contains(str4))
+                    {
+                        Move(str3, str4, Board, GameBoard);
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Sorry, you can move there.");
+                    }
+                }
                 Console.ForegroundColor = ConsoleColor.Black;
 
 
-                if (b.Contains(str4))
+                if (jiang.getstate() != true || shuai.getstate() != true)
                 {
-                    Move(str3, str4, Board, GameBoard);
-                }
-                else
-                {
-                    Console.WriteLine("Sorry, you can move there.");
+
+                    Console.ForegroundColor = ConsoleColor.White;
+                    if (jiang.getstate() == false)
+                    {
+                        Console.BackgroundColor = ConsoleColor.Red;
+                        Console.WriteLine("帅 is Winner.");
+                    }
+                    if (shuai.getstate() == false)
+                    {
+                        Console.BackgroundColor = ConsoleColor.Blue;
+                        Console.WriteLine("将 is Winner.");
+                    }
+                    break;
                 }
 
-                if (jiang.getstate() == false)
-                {
-                    Console.WriteLine("帅 is Winner.");
-                }
-                if (shuai.getstate() == false)
-                {
-                    Console.WriteLine("将 is Winner.");
-                }
             } while (jiang.getstate() == true && shuai.getstate() == true);
 
 

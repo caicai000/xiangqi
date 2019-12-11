@@ -44,12 +44,16 @@ namespace chinesechree
         }
         public static void Move(string str1, string str2, Chess[,] Board,gameBoard GameBoard)
         {
-
-
+           
                 string[] sArray = str1.Split(',');
                 int a = Convert.ToInt32(sArray[0]);
                 int b = Convert.ToInt32(sArray[1]);
 
+                string str = a + "," + b;
+                ArrayList position = canmovejiangjun(str, Board);
+           
+            if (position.Contains(str2))
+            {
                 string[] ssArray = str2.Split(',');
                 int c = Convert.ToInt32(ssArray[0]);
                 int d = Convert.ToInt32(ssArray[1]);
@@ -75,8 +79,18 @@ namespace chinesechree
                 GameBoard.move(Board);
                 GameBoard.print(Board);
 
-                
+
                 jiangjun(Board);
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("Sorry, you can not move there.");
+            }
+                
+    
+
+                
 
         }
 
@@ -177,7 +191,7 @@ namespace chinesechree
                 }
                 if (Board[a, d] == null)
                 {
-                    Console.Write("(" + a + "," + d + ")");
+                    //Console.Write("(" + a + "," + d + ")");
                     position.Add(a + "," + d);
                 }
             }
@@ -356,7 +370,7 @@ namespace chinesechree
                     {
                         if (a + 1 >= 0 && a + 1 <= 9 && b + 2 >= 0 && b + 2 <= 8)
                         {
-                            c = a + 1;
+                            c = a + 1;  
                             d = b + 2;
 
                             if (Board[c, d] != null)
@@ -960,7 +974,29 @@ namespace chinesechree
                 }
 
             }
-            return position;
+            if (a + 1 >= 0 && a + 1 <= 2 && b >= 3 && b <= 5)
+            {
+                c = a + 1;
+                d = b;
+
+                for(int i = c; i < 10; i++)
+                {
+                    if (Board[i, d] != null)
+                    {
+                        if(Board[i,d].getname()!= "将")
+                        {
+                            break;
+                        }
+                        if (Board[i, d].getname() == "将")
+                        {
+                            position.Add(i + ","+d);
+                        }
+
+                    }
+                }
+
+            }
+                return position;
         }
 
         public static ArrayList jiangmovefunction(int a, int b, Chess[,] Board, ArrayList position)
@@ -1057,6 +1093,29 @@ namespace chinesechree
                     //Console.Write("(" + c + "," + d + ")");
                     position.Add(c + "," + d);
                    
+                }
+
+            }
+            if (a - 1 >= 7 && a - 1 <= 9 && b >= 3 && b <= 5)
+            {
+                c = a - 1;
+                d = b;
+
+                for (int i = c; i >=0; i--)
+                {
+                   
+                    if (Board[i, d] != null)
+                    {
+                        if (Board[i, d].getname() != "帅")
+                        {
+                            break;
+                        }
+                        if (Board[i, d].getname() == "帅")
+                        {
+                            position.Add(i + "," + d);
+                        }
+
+                    }
                 }
 
             }
@@ -1385,6 +1444,8 @@ namespace chinesechree
         public static ArrayList canmove(string str, Chess[,] Board,gameBoard Gameboard)
         {
             string[] sArray = str.Split(',');
+
+
             int a = Convert.ToInt32(sArray[0]);
             int b = Convert.ToInt32(sArray[1]);
 
