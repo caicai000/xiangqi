@@ -125,7 +125,7 @@ namespace Chinesechess
             GameBoard.restart(bing9);
             GameBoard.restart(bing10);
 
-            GameBoard.print();
+            GameBoard.print(Board);
 
             
 
@@ -134,6 +134,8 @@ namespace Chinesechess
 
             do
             {
+
+                
                 Console.BackgroundColor = ConsoleColor.Red;
                 Console.ForegroundColor = ConsoleColor.White;
 
@@ -169,14 +171,7 @@ namespace Chinesechess
                     Console.WriteLine("将 is Winner.");
                 }
 
-            } while (jiang.getstate() == true && shuai.getstate() == true);
-
-
-
-
-
-            do
-            {
+           
                 Console.BackgroundColor = ConsoleColor.Blue;
                 Console.ForegroundColor = ConsoleColor.White;
 

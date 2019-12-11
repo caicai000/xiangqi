@@ -69,7 +69,7 @@ namespace chinesechree
                
         }
 
-        public void print()
+        public void print(Chess[,] Board)
         {
             Console.BackgroundColor = ConsoleColor.Yellow;
             Console.ForegroundColor = ConsoleColor.Black;
@@ -90,6 +90,23 @@ namespace chinesechree
 
                 for (int j = 0; j < 17; j++)
                 {
+                    Console.ForegroundColor = ConsoleColor.Black;
+                    if (i % 2 == 0 && j % 2 == 0)
+                    {
+                        if (Board[i / 2, j / 2] != null)
+                        {
+                            if (Board[i / 2, j / 2].getcolor() == "red")
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                            }
+
+                            if (Board[i / 2, j / 2].getcolor() == "black")
+                            {
+                                Console.ForegroundColor = ConsoleColor.Blue;
+                            }
+                        }
+
+                    }
                     Console.Write(ShowGameBoard[i, j]);
                     if (j == 16)
                     {

@@ -73,8 +73,68 @@ namespace chinesechree
 
                 }
                 GameBoard.move(Board);
-                GameBoard.print();
+                GameBoard.print(Board);
 
+                
+                jiangjun(Board);
+
+        }
+
+        public static void jiangjun(Chess[,] Board)
+        {
+            
+            for (int i = 0; i < 10; i++)
+            {
+                for(int j = 0; j <9; j++)
+                {
+                    if(Board[i,j] != null)
+                    {
+                        if(Board[i,j].getcolor() == "red")
+                        {
+                            string str = i + "," + j;
+                            ArrayList position = canmovejiangjun(str, Board);
+                            for (int k = 0; k < position.Count; k++)
+                            {
+                                string str1 = position[k].ToString();
+                                string[] sArray = str1.Split(',');
+                                int a = Convert.ToInt32(sArray[0]);
+                                int b = Convert.ToInt32(sArray[1]);
+                                
+                                if (Board[a, b] != null)
+                                {
+                                    if (Board[a, b].getname() == "将")
+                                    {
+                                        Console.ForegroundColor = ConsoleColor.White;
+                                        Console.WriteLine("将军");
+                                    }
+                                }
+
+                            }
+                        }
+                        if (Board[i, j].getcolor() == "Black")
+                        {
+                            string str = i + "," + j;
+                            ArrayList position = canmovejiangjun(str, Board);
+                            for (int k = 0; k < position.Count; k++)
+                            {
+                                string str1 = position[k].ToString();
+                                string[] sArray = str1.Split(',');
+                                int a = Convert.ToInt32(sArray[0]) * 2;
+                                int b = Convert.ToInt32(sArray[1]) * 2;
+
+                                if (Board[a, b] != null)
+                                {
+                                    if (Board[a, b].getname() == "将")
+                                    {
+                                        Console.ForegroundColor = ConsoleColor.White;
+                                        Console.WriteLine("将军");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         public static ArrayList chemovefunction(int a, int b, Chess[,] Board, ArrayList position)
@@ -1395,6 +1455,81 @@ namespace chinesechree
             {
                 paomovefunction(a, b, Board, position);
                 Gameboard.Showmove(position);
+
+            }
+
+            return position;
+        }
+        public static ArrayList canmovejiangjun(string str, Chess[,] Board)
+        {
+            string[] sArray = str.Split(',');
+            int a = Convert.ToInt32(sArray[0]);
+            int b = Convert.ToInt32(sArray[1]);
+
+            string str1 = Board[a, b].getname();
+
+            ArrayList position = new ArrayList();
+
+            //che
+            if (str1.Contains("车"))
+            {
+
+                chemovefunction(a, b, Board, position);
+         
+            }
+
+            // ma
+            if (str1.Contains("马"))
+            {
+
+                mamovefunction(a, b, Board, position);
+     
+            }
+
+            // xiang
+            if (str1.Contains("像") || str1.Contains("相"))
+            {
+                xiangmovefunction(a, b, Board, position);
+
+            }
+
+            // shi
+
+
+            if (str1.Contains("仕") || str1.Contains("士"))
+            {
+                shimovefunction(a, b, Board, position);
+                
+
+            }
+
+
+            if (str1.Contains("帅"))
+            {
+
+                shuaimovefunction(a, b, Board, position);
+
+                
+            }
+
+            if (str1.Contains("将"))
+            {
+                jiangmovefunction(a, b, Board, position);
+                
+            }
+
+
+
+            if (str1.Contains("兵") || str1.Contains("卒"))
+            {
+                bingmovefunction(a, b, Board, position);
+               
+
+            }
+            if (str1.Contains("炮"))
+            {
+                paomovefunction(a, b, Board, position);
+          
 
             }
 
